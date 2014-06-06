@@ -1,0 +1,66 @@
+﻿
+<!DOCTYPE html>
+<html lang="@MvcApplication.CurrentCultureName">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@MvcApplication.CurrentCultureName</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("語系驗證", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink(MvcApplication.CurrentCultureDisplay("zh-TW "), "Index", "Home")</li>
+                    <li>@Html.ActionLink(MvcApplication.CurrentCultureDisplay("en-GB"), "Index", "Home", new { cultureName = "en-US" }, null)</li>
+                    <li>@Html.ActionLink(MvcApplication.CurrentCultureDisplay("af-ZA "), "Index", "Home", new { cultureName = "af-ZA" }, null)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - 我的 ASP.NET 應用程式</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/globalize/globalize.js"></script>
+    <script src="~/Scripts/globalize/cultures/globalize.culture.@(MvcApplication.CurrentCultureName).js"></script>
+    <script src="~/Scripts/jquery.validate.globalize.js"></script>
+
+
+    @RenderSection("scripts", required: false)
+    <script>
+        (function ($, Globalize) {
+            $.validator.methods.date = function (value, element) {
+                var val = Globalize.parseDate(value);
+                return this.optional(element) || /^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/.test(value);
+            };
+        }(jQuery, Globalize));
+
+        $(function () {
+            Globalize.culture("@MvcApplication.CurrentCultureName");
+        });
+    </script>
+</body>
+</html>
