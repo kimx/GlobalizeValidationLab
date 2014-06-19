@@ -24,8 +24,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink(MvcApplication.CurrentCultureDisplay("zh-TW "), "Index", "Home")</li>
-                    <li>@Html.ActionLink(MvcApplication.CurrentCultureDisplay("en-GB"), "Index", "Home", new { cultureName = "en-US" }, null)</li>
-                    <li>@Html.ActionLink(MvcApplication.CurrentCultureDisplay("af-ZA "), "Index", "Home", new { cultureName = "af-ZA" }, null)</li>
+                    <li>@Html.ActionLink(MvcApplication.CurrentCultureDisplay("en-US"), "Index", "Home", new { cultureName = "en-US" }, null)</li>
+                    <li>@Html.ActionLink("英文(南非)", "Index", "Home", new { cultureName = "en-ZA" }, null)</li>
                 </ul>
             </div>
         </div>

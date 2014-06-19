@@ -8,7 +8,7 @@ namespace GlobalizeValidationLab.Models
 {
     public class ProductModel
     {
-
+        [Display(Name = "CreateDate", ResourceType = typeof(GlobalizeValidationLab.Resources.Index))]
         [DataType(DataType.Date)]
         public DateTime CreateDate { get; set; }
 

@@ -36,8 +36,11 @@ namespace GlobalizeValidationLab
 
         void MvcApplication_BeginRequest(object sender, EventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.CreateSpecificCulture(CurrentCultureName);
-            System.Threading.Thread.CurrentThread.CurrentUICulture = System.Threading.Thread.CurrentThread.CurrentCulture;
+            if (CurrentCultureName.StartsWith("en-"))
+                System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo("en");
+            else
+                System.Threading.Thread.CurrentThread.CurrentCulture = new CultureInfo(CurrentCultureName);
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(CurrentCultureName);
         }
         protected void Application_Start()
         {
